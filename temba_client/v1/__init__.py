@@ -53,7 +53,7 @@ class TembaClient(BasePagingClient):
         payload = self._build_params(name=name, group_uuid=group)
         return Campaign.deserialize(self._post('campaigns', None, payload))
 
-    def create_contact(self, name, urns, fields, groups):
+    def create_contact(self, name, urns, **kwargs):
         """
         Creates a new contact
 
@@ -63,7 +63,7 @@ class TembaClient(BasePagingClient):
         :param list groups: list of group objects or UUIDs
         :return: the new contact
         """
-        payload = self._build_params(name=name, urns=urns, fields=fields, group_uuids=groups)
+        payload = self._build_params(name=name, urns=urns, **kwargs)
         return Contact.deserialize(self._post('contacts', None, payload))
 
     def create_event(self, campaign, relative_to, offset, unit, delivery_hour, message=None, flow=None):
